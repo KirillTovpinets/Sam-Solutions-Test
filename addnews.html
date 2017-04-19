@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="addNew">
 
 <head>
 
@@ -29,11 +29,18 @@
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="CheckNewController">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <a class="navbar-brand" href="index.html">Back</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li ng-show="{{ window.localStorage.hasNew }}">
+                        <a href="">New <span class="badge">{{ window.localStorage.numNewPosts }}</span></a>
+                    </li>
+                </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -41,22 +48,67 @@
     </nav>
 
     <!-- Page Content -->
-    <div class="container">
+    <div class="container" ng-controller="addNewCtr as Add">
 		<h1>
 			Add news
 		</h1>
-        <form>
+        <form ng-submit="Add.addNewsToStorage()">
 		  <div class="form-group">
 		    <label for="title">Title</label>
-		    <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Title">
+		    <input ng-model="Add.post.title" type="text" class="form-control" id="title" value="Title" placeholder="Title">
 		  </div>
+          <div class="form-group">
+            <label for="title">Author</label>
+            <input ng-model="Add.post.author" type="text" class="form-control" id="author" value="Author" placeholder="Author">
+          </div>
 		  <div class="form-group">
 		    <label for="exampleTextarea">News content</label>
-		    <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+		    <textarea ng-model="Add.post.content" class="form-control" placeholder="Content" value="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum." id="exampleTextarea" rows="13"></textarea>
 		  </div>
-		  <button type="submit" class="btn btn-primary">Submit</button>
+          <div class="form-group">
+            <label for="exampleTextarea">ImageUrl</label>
+            <input type="text" ng-model="Add.post.imgUrl" class="form-control" placeholder="ImageUrl" value="http://placehold.it/1700x500" id="imgUrl">
+          </div>
+          <input type="hidden" ng-model="post.published" id="published" name="published">
+		  <button type="submit" class="btn btn-success">Publish</button>
 		</form>
+        <hr>
+        <h1>Preview</h1>
+        <div class="col-lg-12 jumbotron">
+                <!-- Blog Post -->
 
+                <!-- Title -->
+                <h1>{{ Add.post.title }}</h1>
+
+                <!-- Author -->
+                <p class="lead">
+                    by <a href="#">{{ Add.post.author }}</a>
+                </p>
+
+                <hr>
+
+                <!-- Date/Time -->
+                <p><span class="glyphicon glyphicon-time"></span> Posted on {{ Add.post.date | date }}</p>
+
+                <hr>
+
+                <!-- Preview Image -->
+                <img class="img-responsive" ng-src="{{ Add.post.imgUrl }}" alt="Post Image">
+
+                <hr>
+
+                <!-- Post Content -->
+                <p class="lead">{{ Add.post.content }}</p>
+
+
+                <!-- Blog Comments -->
+
+            </div>
         <!-- Footer -->
         <footer>
             <div class="row">
@@ -72,6 +124,7 @@
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
     <script src="js/angular.js"></script>
+    <script src="js/addNews.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 

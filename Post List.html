@@ -72,14 +72,14 @@
                     <h3>{{ news.title }}</h3>
                     <h4>{{ news.author }}</h4>
                     <p>{{ news.description }}</p>
-                    <a class="btn btn-primary" href="#">View Article <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <a class="btn btn-primary" href="{{ news.url }}">View Article <span class="glyphicon glyphicon-chevron-right"></span></a>
                 </div>
             </div>
             <!-- /.row -->
             <hr>
         </div>
         <!-- Pagination -->
-        <div class="row text-center">
+        <!-- <div class="row text-center">
             <div class="col-lg-12">
                 <ul class="pagination">
                     <li>
@@ -105,16 +105,15 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </div> -->
         <!-- /.row -->
 
-        <hr>
 
         <!-- Footer -->
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2017</p>
+                    <p>Copyright &copy; Kirill Tovpinets 2017</p>
                 </div>
             </div>
             <!-- /.row -->
@@ -127,6 +126,7 @@
     <script src="js/jquery.js"></script>
     <script src="js/angular.js"></script>
     <script src="js/postList.js"></script>
+    <script src="js/services/getListFactory.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
